@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY WALLET — expense tracker</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="aurora"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="mark"></span>
+    <span>MY<b>WALLET</b></span>
+  </div>
+  <div class="tools">
+    <select id="currency" aria-label="Currency">
+      <option value="₹">₹</option>
+      <option value="$">$</option>
+      <option value="€">€</option>
+      <option value="£">£</option>
+    </select>
+    <button class="icon-btn" id="theme-toggle" aria-label="Switch theme">
+      <span id="theme-icon">◐</span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ══════════════ SUMMARY ══════════════ -->
+  <section class="hero card">
+    <div class="hero-main">
+      <span class="label">Total balance</span>
+      <h1 id="balance">—</h1>
+      <span class="muted" id="insight">—</span>
+    </div>
+    <div class="hero-side">
+      <div class="mini">
+        <span class="label">Income</span>
+        <b class="up" id="income">—</b>
+      </div>
+      <div class="mini">
+        <span class="label">Spent</span>
+        <b class="down" id="expense">—</b>
+      </div>
+      <div class="mini">
+        <span class="label">This month</span>
+        <b id="month-spend">—</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ ADD ENTRY ══════════════ -->
+  <section class="card">
+    <h2>Add an entry</h2>
+
+    <div class="seg" id="type-seg">
+      <button class="seg-btn active" data-type="expense">Expense</button>
+      <button class="seg-btn" data-type="income">Income</button>
+    </div>
+
+    <label for="amount">Amount</label>
+    <div class="input-wrap">
+      <span class="sym">₹</span>
+      <input type="number" id="amount" placeholder="0.00" step="0.01" min="0">
+    </div>
+
+    <div class="row" id="category-row">
+      <div>
+        <label for="category">Category</label>
+        <select id="category"></select>
+      </div>
+      <div>
+        <label for="date">Date</label>
+        <input type="date" id="date">
+      </div>
+    </div>
+
+    <label for="note">Note <span class="muted">(optional)</span></label>
+    <input type="text" id="note" placeholder="Groceries, cab fare, rent…" maxlength="60">
+
+    <button class="primary" id="btn-add">Add entry</button>
+    <p class="error hidden" id="error"></p>
+  </section>
+
+  <!-- ══════════════ BUDGET + CATEGORIES ══════════════ -->
+  <section class="card">
+    <h2>Monthly budget</h2>
+    <div class="budget-row">
+      <div class="input-wrap slim">
+        <span class="sym">₹</span>
+        <input type="number" id="budget" placeholder="30000" step="500" min="0">
+      </div>
+      <button class="ghost" id="btn-budget">Set</button>
+    </div>
+    <div class="bar"><i id="budget-fill"></i></div>
+    <p class="muted" id="budget-note">No budget set for this month.</p>
+
+    <h2 class="mt">Where it goes</h2>
+    <div class="donut-row">
+      <canvas id="donut" width="150" height="150"></canvas>
+      <ul class="legend" id="legend"></ul>
+    </div>
+  </section>
+
+  <!-- ══════════════ 7 DAY CHART ══════════════ -->
+  <section class="card wide">
+    <div class="card-head">
+      <div>
+        <h2>Last 7 days</h2>
+        <p class="muted">Daily spending.</p>
+      </div>
+      <span class="chip" id="week-total">—</span>
+    </div>
+    <canvas id="week-chart" width="900" height="180"></canvas>
+  </section>
+
+  <!-- ══════════════ HISTORY ══════════════ -->
+  <section class="card wide">
+    <div class="card-head">
+      <div>
+        <h2>History</h2>
+        <p class="muted" id="count">—</p>
+      </div>
+      <div class="filters">
+        <input type="search" id="search" placeholder="Search notes…">
+        <select id="filter"></select>
+        <button class="ghost danger" id="btn-reset">Reset wallet</button>
+      </div>
+    </div>
+    <ul class="entries" id="entries"></ul>
+  </section>
+
+</main>
+
+<footer class="foot">MY WALLET · in-memory demo — entries are not saved, a refresh clears the wallet.</footer>
+
+<script src="js/store.js"></script>
+<script src="js/wallet.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
